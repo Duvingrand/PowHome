@@ -20,5 +20,27 @@
     PawHome está dirigida a todas las personas interesadas en ayudar a perros y gatos en refugios de animales, ya sea a través de la adopción, apadrinamiento (donando una cantidad mensual fija), o haciendo donaciones directas a las entidades. También está destinada a quienes buscan opciones alternativas de alimento para sus mascotas.
 </p>
 
+<h3>Integrantes Backend:</h3>
+<h4>Brayan Felipe Rodriguez Mosquera</h4>
+<ul>
+  <li></li>
+  <li><a>Linkedin</a></li>
+  <li>Github</li>
+</ul>
+
+<h4>José Ignacio zapata</h4>
+<ul>
+  <li></li>
+  <li>Linkedin</li>
+  <li>Github</li>
+</ul>
+
+<h4>Juan Pablo Gómez Bustamante</h4>
+<ul>
+  <li></li>
+  <li>Linkedin</li>
+  <li>Github</li>
+</ul>
+
 </body>
 </html>
