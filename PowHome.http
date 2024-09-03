@@ -1,0 +1,6 @@
+@PowHome_HostAddress = http://localhost:5143
+
+GET {{PowHome_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
