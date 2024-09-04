@@ -11,9 +11,16 @@ namespace PowHome.Models;
 public class Product
 {
     [Key]
-    public int Id { get; set;}
-    public required string Name { get; set;}
+    public int Id { get; set; }
+
+
+    [MinLength(5, ErrorMessage = "the Name field must be at least {1} chartes.")]
+    [MaxLength(25, ErrorMessage = "the Name field must be at most {1} chartes.")]
+    public required string Name { get; set; }
     public required double Price { get; set; }
+
+    [MinLength(5, ErrorMessage = "the Description field must be at least {1} chartes.")]
+    [MaxLength(225, ErrorMessage = "the Description field must be at most {1} chartes.")]
     public required string Description { get; set; }
     public required double WeightKG { get; set; }
     public required int Quantity { get; set; }

@@ -13,5 +13,10 @@ public class AnimalCondition
     public required int AnimalId { get; set; }
     public required int ConditionId { get; set; }
 
+    // conections Foreing
+    [ForeignKey("ConditionId")]
+    public Condition condition { get; set; }
 
+    [ForeignKey("AnimalId")]
+    public Animal animal { get; set; }
 }

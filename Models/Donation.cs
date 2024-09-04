@@ -11,11 +11,15 @@ namespace PowHome.Models;
 public class Donation
 {
     [Key]
-    public int Id { get; set;}
+    public int Id { get; set; }
     public required double Amount { get; set; }
     public required DateOnly DayOfDonation { get; set; }
 
     // Foreign Key
-    public int UserId { get; set;}
-   
+    public required int UserId { get; set; }
+
+    // conections Foreing
+    [ForeignKey("UserId")]
+    public  User  user { get; set; }
+
 }

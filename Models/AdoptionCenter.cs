@@ -23,12 +23,15 @@ public class AdoptionCenter
 
     [MinLength(5, ErrorMessage = "the Phone field must be at least {1} chartes.")]
     [MaxLength(25, ErrorMessage = "the Phone field must be at most {1} chartes.")]
+    [DataType(DataType.PhoneNumber)]
     public required string Phone { get; set; }
 
+    [EmailAddress(ErrorMessage = "the email is usuing an invalid format")]
     [MinLength(5, ErrorMessage = "the Email field must be at least {1} chartes.")]
     [MaxLength(100, ErrorMessage = "the Email field must be at most {1} chartes.")]
     public string? Email { get; set; }
 
+    // foring key
     public int? DonationsId { get; set; }
 
     // conections Foreing
