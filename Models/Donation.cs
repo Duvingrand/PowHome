@@ -1,15 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PowHome.Models;
+[Table("donations")] // name of the table
 
 public class Donation
 {
+    [Key]
     public int Id { get; set;}
-    public int UserId { get; set;}
-    public double Amount { get; set; }
-    public DateOnly DayOfDonation { get; set; }
+    public required double Amount { get; set; }
+    public required DateOnly DayOfDonation { get; set; }
 
+    // Foreign Key
+    public int UserId { get; set;}
+   
 }

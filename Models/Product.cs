@@ -6,16 +6,16 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace PowHome.Models;
-[Table("users")] // name of the table
+[Table("products")] // name of the table
 
-public class User
+public class Product
 {
     [Key]
     public int Id { get; set;}
     public required string Name { get; set;}
-    public required string Phone { get; set; }
-    public required string Email { get; set; }
-    public required string Password { get; set; }
-    public required bool IsAdmin { get; set; }
+    public required double Price { get; set; }
+    public required string Description { get; set; }
+    public required double WeightKG { get; set; }
+    public required int Quantity { get; set; }
 
 }

@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PowHome.Models;
+[Table("animal_conditions")] // name of the table
 
 public class AnimalCondition
 {
-    public int Id { get; set; }
-    public int AnimalId { get; set; }
-    public int ConditionId { get; set; }
+    // foring key
+    public required int AnimalId { get; set; }
+    public required int ConditionId { get; set; }
+
 
 }
