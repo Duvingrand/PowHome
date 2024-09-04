@@ -22,12 +22,12 @@ public class Sponsorshipment
 
     // conections Foreing
     [ForeignKey("UserId")]
-    public User user { get; set; }
+    public User User { get; set; }
 
     [ForeignKey("AnimalId")]
-    public Animal animal { get; set; }
+    public Animal Animal { get; set; }
 
     [ForeignKey("AdoptionCenterId")]
-    public AdoptionCenter adoptionCenter { get; set; }
+    public AdoptionCenter AdoptionCenter { get; set; }
 
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace PowHome.Models;
-[Table("animal_conditions")] // name of the table
+[Table("conditions")] // name of the table
 
 public class Condition
 {

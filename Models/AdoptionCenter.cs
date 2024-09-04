@@ -36,5 +36,5 @@ public class AdoptionCenter
 
     // conections Foreing
     [ForeignKey("DonationsId")]
-    public Donation donation { get; set; }
+    public Donation Donation { get; set; }
 }

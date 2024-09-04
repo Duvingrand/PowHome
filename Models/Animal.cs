@@ -37,12 +37,12 @@ public class Animal
 
     // foring key
     public int? SpecieID { get; set; }
-    public required string AdoptionCenterID { get; set; }
+    public required int AdoptionCenterID { get; set; }
 
     // conections Foreing
     [ForeignKey("SpecieID")]
-    public Specie specie { get; set; }
+    public Specie Specie { get; set; }
 
     [ForeignKey("AdoptionCenterID")]
-    public AdoptionCenter adoptionCenter { get; set; }
+    public AdoptionCenter AdoptionCenter { get; set; }
 }
