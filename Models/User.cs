@@ -31,6 +31,6 @@ public class User
     [MinLength(5, ErrorMessage = "the Email field must be at least {1} chartes.")]
     [MaxLength(100, ErrorMessage = "the Email field must be at most {1} chartes.")]
     public required string Password { get; set; }
-    public required bool IsAdmin { get; set; }
+    public required bool IsAdmin { get; set; }  
 
 }
