@@ -89,10 +89,10 @@ namespace PowHome.Controllers.Products
 
 
         // Get by Name
-        [HttpGet("FindByName/{Name}")]
+        [HttpGet("FindByName")]
         public async Task<ActionResult<Product>> GetProduct(string name)
         {
-            var product = await _context.Products.FindAsync(name);
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Name == name);
 
             if (product == null)
             {
