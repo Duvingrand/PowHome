@@ -20,7 +20,7 @@ public class Animal
     [MinLength(5, ErrorMessage = "the Breed field must be at least {1} chartes.")]
     [MaxLength(225, ErrorMessage = "the Breed field must be at most {1} chartes.")]
     public string? Breed { get; set; }
-    public required DateOnly BirthDate { get; set; }
+    public required DateTime BirthDate { get; set; }
 
     [MinLength(5, ErrorMessage = "the Description field must be at least {1} chartes.")]
     [MaxLength(300, ErrorMessage = "the Description field must be at most {1} chartes.")]
