@@ -55,13 +55,15 @@ namespace PowHome.Controllers.Users
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, User);
         }
 
-        // PUT: api/Users/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User u)
+
+        // PUT: api/Users
+        // PUT method works with search Id
+        [HttpPut]
+        public async Task<IActionResult> PutUser(User u)
         {
-            if (id != u.Id)
+            if (u.Id == 0)  // Verifica que el objeto tiene un ID válido
             {
-                return BadRequest();
+                return BadRequest("El usuario debe tener un ID.");
             }
 
             _context.Entry(u).State = EntityState.Modified;
@@ -72,7 +74,7 @@ namespace PowHome.Controllers.Users
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(u.Id))
                 {
                     return NotFound();
                 }
