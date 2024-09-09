@@ -11,7 +11,7 @@ using PowHome.Models;
 
 namespace PowHome.Controllers.Users
 {
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class UsersController : Controller
     {
         private readonly MyDbContext _context;

@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Bogus.DataSets;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using PowHome.Data;
 using PowHome.Models;
 
 namespace PowHome.Controllers.Products
 {
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class ProductsController : Controller
     {
         private readonly MyDbContext _context;
