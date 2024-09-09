@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PowHome.Models;
@@ -35,6 +36,7 @@ public class AdoptionCenter
     public int? DonationsId { get; set; }
 
     // conections Foreing
+    [JsonIgnore]
     [ForeignKey("DonationsId")]
     public Donation Donation { get; set; }
 }

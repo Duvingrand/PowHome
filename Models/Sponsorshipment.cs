@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PowHome.Models;
@@ -21,12 +22,15 @@ public class Sponsorshipment
     public required int AdoptionCenterId { get; set; }
 
     // conections Foreing
+    [JsonIgnore]
     [ForeignKey("UserId")]
     public User User { get; set; }
 
+    [JsonIgnore]
     [ForeignKey("AnimalId")]
     public Animal Animal { get; set; }
 
+    [JsonIgnore]
     [ForeignKey("AdoptionCenterId")]
     public AdoptionCenter AdoptionCenter { get; set; }
 

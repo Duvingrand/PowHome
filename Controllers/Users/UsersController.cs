@@ -30,7 +30,7 @@ namespace PowHome.Controllers.Users
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<User>> GetUser([FromRoute] int id)
         {
             var User = await _context.Users.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace PowHome.Controllers.Users
 
         // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser([FromBody] User user)
         {
             // Aquí deberías hash la contraseña antes de guardar
             // User.Password = HashPassword(User.Password);
@@ -59,14 +59,14 @@ namespace PowHome.Controllers.Users
         // PUT: api/Users
         // PUT method works with search Id
         [HttpPut]
-        public async Task<IActionResult> PutUser(User u)
+        public async Task<IActionResult> PutUser([FromBody] User userPut)
         {
-            if (u.Id == 0)  // Verifica que el objeto tiene un ID válido
+            if (userPut.Id == 0)  // Verifica que el objeto tiene un ID válido
             {
                 return BadRequest("El usuario debe tener un ID.");
             }
 
-            _context.Entry(u).State = EntityState.Modified;
+            _context.Entry(userPut).State = EntityState.Modified;
 
             try
             {
@@ -74,7 +74,7 @@ namespace PowHome.Controllers.Users
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(u.Id))
+                if (!UserExists(userPut.Id))
                 {
                     return NotFound();
                 }
