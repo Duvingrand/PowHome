@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PowHome.Data;
 
@@ -11,9 +12,11 @@ using PowHome.Data;
 namespace PowHome.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240909123819_Cambio de DateTime a DateOnly en el Birthdate de Animal")]
+    partial class CambiodeDateTimeaDateOnlyenelBirthdatedeAnimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,7 +77,6 @@ namespace PowHome.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("Breed")
-                        .IsRequired()
                         .HasMaxLength(225)
                         .HasColumnType("varchar(225)");
 
@@ -101,7 +103,7 @@ namespace PowHome.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("SpecieID")
+                    b.Property<int?>("SpecieID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -317,9 +319,7 @@ namespace PowHome.Migrations
 
                     b.HasOne("PowHome.Models.Specie", "Specie")
                         .WithMany()
-                        .HasForeignKey("SpecieID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SpecieID");
 
                     b.Navigation("AdoptionCenter");
 

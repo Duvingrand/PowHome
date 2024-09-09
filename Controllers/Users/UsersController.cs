@@ -11,7 +11,7 @@ using PowHome.Models;
 
 namespace PowHome.Controllers.Users
 {
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class UsersController : Controller
     {
         private readonly MyDbContext _context;
@@ -40,6 +40,13 @@ namespace PowHome.Controllers.Users
             }
 
             return User;
+        }
+
+        // GET: api/Users/5
+        [HttpGet("{keyword}")]
+        public async Task<ActionResult<User>> GetUserByKeyword(string keyword)
+        {
+            return Ok("HOLA");
         }
 
         // POST: api/Users

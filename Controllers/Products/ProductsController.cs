@@ -29,7 +29,7 @@ namespace PowHome.Controllers.Products
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
         {
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
