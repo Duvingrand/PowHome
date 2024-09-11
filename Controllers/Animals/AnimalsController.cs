@@ -46,7 +46,7 @@ namespace PowHome.Controllers
         }
 
         // Get by Name
-        [HttpGet("FindByName/{Name}")]
+        [HttpGet("FindByName/Name")]
         public async Task<ActionResult<Animal>> Get(string name)
         {
             var animal = await _context.Animals.FirstOrDefaultAsync(p => p.Name == name);
