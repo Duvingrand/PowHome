@@ -37,11 +37,9 @@ public class Animal
     [MaxLength(300, ErrorMessage = "the Location field must be at most {1} chartes.")]
     public required string Location { get; set; }
 
-    // foring key
-    public int SpecieID { get; set; }
-    public int AdoptionCenterID { get; set; }
-
     public bool Specie { get; set; }
+
+    public int AdoptionCenterID { get; set; }
 
     [JsonIgnore]
     [ForeignKey("AdoptionCenterID")]
