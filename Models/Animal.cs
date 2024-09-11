@@ -41,12 +41,6 @@ public class Animal
     public int SpecieID { get; set; }
     public int AdoptionCenterID { get; set; }
 
-<<<<<<< HEAD
-    [JsonIgnore]
-=======
-    
->>>>>>> c98dfa5e75f9c1810c56e2bbe95a0969cbe848d1
-    // conections Foreing
     [JsonIgnore]
     [ForeignKey("SpecieID")]
     public Specie? Specie { get; set; }
