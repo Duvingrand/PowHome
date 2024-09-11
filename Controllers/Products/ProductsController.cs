@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Bogus.DataSets;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using PowHome.Data;
 using PowHome.Models;
 
 namespace PowHome.Controllers.Products
 {
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class ProductsController : Controller
     {
         private readonly MyDbContext _context;
@@ -42,14 +35,14 @@ namespace PowHome.Controllers.Products
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutProduc(Product p)
+        public async Task<IActionResult> PutProduc([FromBody] Product productPut)
         {
-            if (p.Id == 0)
+            if (productPut.Id == 0)
             {
                 return BadRequest("Debe ingresar un id existente");
             }
             
-            _context.Entry(p).State = EntityState.Modified; 
+            _context.Entry(productPut).State = EntityState.Modified; 
                 
             try
             {
@@ -57,7 +50,7 @@ namespace PowHome.Controllers.Products
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(p.Id))
+                if (!ProductExists(productPut.Id))
                 {
                     return NotFound();
                 }
@@ -71,7 +64,7 @@ namespace PowHome.Controllers.Products
 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var product = await _context.Products.FindAsync(id);
 
@@ -103,12 +96,9 @@ namespace PowHome.Controllers.Products
         }
 
 
-
-
-
         // Get by ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct (int id)
+        public async Task<ActionResult<Product>> GetProduct([FromRoute] int id)
         {
             var product = await _context.Products.FindAsync(id);
 

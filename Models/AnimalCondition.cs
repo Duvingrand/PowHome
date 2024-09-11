@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PowHome.Models;
@@ -16,9 +17,12 @@ public class AnimalCondition
     public required int ConditionId { get; set; }
 
     // conections Foreing
+    [JsonIgnore]
     [ForeignKey("ConditionId")]
     public Condition Condition { get; set; }
 
+
+    [JsonIgnore]
     [ForeignKey("AnimalId")]
     public Animal Animal { get; set; }
 }
