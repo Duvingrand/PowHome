@@ -41,9 +41,7 @@ public class Animal
     public int SpecieID { get; set; }
     public int AdoptionCenterID { get; set; }
 
-    [JsonIgnore]
-    [ForeignKey("SpecieID")]
-    public Specie? Specie { get; set; }
+    public bool Specie { get; set; }
 
     [JsonIgnore]
     [ForeignKey("AdoptionCenterID")]
