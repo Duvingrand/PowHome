@@ -16,12 +16,13 @@ public class Animal
 
     [MinLength(5, ErrorMessage = "the name field must be at least {1} chartes.")]
     [MaxLength(225, ErrorMessage = "the name field must be at most {1} chartes.")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [MinLength(5, ErrorMessage = "the Breed field must be at least {1} chartes.")]
     [MaxLength(225, ErrorMessage = "the Breed field must be at most {1} chartes.")]
-    public string? Breed { get; set; }
-    public required DateTime BirthDate { get; set; }
+    public required string Breed { get; set; }
+
+    public required DateOnly BirthDate { get; set; }
 
     [MinLength(5, ErrorMessage = "the Description field must be at least {1} chartes.")]
     [MaxLength(300, ErrorMessage = "the Description field must be at most {1} chartes.")]
@@ -37,16 +38,20 @@ public class Animal
     public required string Location { get; set; }
 
     // foring key
-    public int? SpecieID { get; set; }
-    public required int AdoptionCenterID { get; set; }
+    public int SpecieID { get; set; }
+    public int AdoptionCenterID { get; set; }
 
+<<<<<<< HEAD
+    [JsonIgnore]
+=======
     
+>>>>>>> c98dfa5e75f9c1810c56e2bbe95a0969cbe848d1
     // conections Foreing
     [JsonIgnore]
     [ForeignKey("SpecieID")]
-    public Specie Specie { get; set; }
+    public Specie? Specie { get; set; }
 
     [JsonIgnore]
     [ForeignKey("AdoptionCenterID")]
-    public AdoptionCenter AdoptionCenter { get; set; }
+    public AdoptionCenter? AdoptionCenter { get; set; }
 }

@@ -42,6 +42,13 @@ namespace PowHome.Controllers.Users
             return User;
         }
 
+        // GET: api/Users/5
+        [HttpGet("{keyword}")]
+        public async Task<ActionResult<User>> GetUserByKeyword(string keyword)
+        {
+            return Ok("HOLA");
+        }
+
         // POST: api/Users
         [HttpPost]
         public async Task<ActionResult<User>> PostUser([FromBody] User user)
