@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PowHome.Data;
 
@@ -11,9 +12,11 @@ using PowHome.Data;
 namespace PowHome.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240912172648_ChangeOfDonations4")]
+    partial class ChangeOfDonations4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,7 +189,7 @@ namespace PowHome.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdoptionCenterId")
+                    b.Property<int?>("AdoptionCenterId")
                         .HasColumnType("int");
 
                     b.Property<double>("Amount")
@@ -364,9 +367,7 @@ namespace PowHome.Migrations
                 {
                     b.HasOne("PowHome.Models.AdoptionCenter", "AdoptionCenter")
                         .WithMany()
-                        .HasForeignKey("AdoptionCenterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AdoptionCenterId");
 
                     b.HasOne("PowHome.Models.User", "User")
                         .WithMany()

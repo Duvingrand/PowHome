@@ -13,22 +13,26 @@ public class FoodDonations
 {
     [Key]
     public int Id { get; set; }
-    public required Product Amount {get; set;}
     public required DateOnly DayOfDonation { get; set; }
 
     // Foreign Key
-    public required int UserId { get; set; }
+    public int? UserId { get; set; }
+
+    public int? ProductId { get; set; }
 
     public int? AdoptionCenterId { get; set; }
 
     // conections Foreing
     [JsonIgnore]
     [ForeignKey("UserId")]
-    public  User  User { get; set; }
+    public User? User { get; set; }
 
-    // conections Foreing
+    [JsonIgnore]
+    [ForeignKey("ProductId")]
+    public Product? Product { get; set; }
+
     [JsonIgnore]
     [ForeignKey("AdoptionCenterId")]
-    public AdoptionCenter AdoptionCenter { get; set; }
+    public AdoptionCenter? AdoptionCenter { get; set; }
 
 }
