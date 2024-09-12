@@ -8,7 +8,8 @@ namespace PowHome.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Condition> Conditions { get; set; }
-        public DbSet<Donation> Donations { get; set; }
+        public DbSet<MoneyDonations> MoneyDonations { get; set; }
+        public DbSet<FoodDonations> FoodDonations { get; set; }
         public DbSet<AdoptionCenter> AdoptionCenters { get; set; }
         public DbSet<Animal> Animals { get; set; }
         public DbSet<AnimalCondition> AnimalConditions { get; set; }
