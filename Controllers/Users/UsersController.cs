@@ -66,6 +66,7 @@ namespace PowHome.Controllers.Users
                 return BadRequest("El usuario debe tener un ID.");
             }
 
+            userPut.Password = AuthController.HashPassword(userPut.Password);
             _context.Entry(userPut).State = EntityState.Modified;
 
             try
