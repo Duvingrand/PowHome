@@ -32,11 +32,4 @@ public class AdoptionCenter
     [MaxLength(100, ErrorMessage = "the Email field must be at most {1} chartes.")]
     public string? Email { get; set; }
 
-    // foring key
-    public int? DonationsId { get; set; }
-
-    // conections Foreing
-    [JsonIgnore]
-    [ForeignKey("DonationsId")]
-    public Donation Donation { get; set; }
 }
