@@ -7,7 +7,6 @@ namespace PowHome.Data
     public class MyDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Specie> Species { get; set; }
         public DbSet<Condition> Conditions { get; set; }
         public DbSet<Donation> Donations { get; set; }
         public DbSet<AdoptionCenter> AdoptionCenters { get; set; }

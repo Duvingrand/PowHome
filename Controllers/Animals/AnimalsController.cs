@@ -9,7 +9,7 @@ namespace PowHome.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AnimalsController : ControllerBase
+    public class AnimalsController : Controller
     {
         private readonly MyDbContext _context;
 
@@ -20,10 +20,12 @@ namespace PowHome.Controllers
 
         // Bring them all
         [HttpGet]
-        public async Task<IActionResult> Get()
+         public async Task<ActionResult<IEnumerable<Animal>>> GetAnimal()
         {
-            var animals = await _context.Animals.Include(a => a.Specie).Include(a => a.AdoptionCenter).ToListAsync();
-            return Ok(animals);
+            // var animals = await _context.Animals.Include(a => a.Specie).Include(a => a.AdoptionCenter).ToListAsync();
+            // return Ok(animals);
+            return await _context.Animals.ToListAsync();
+
         }
 
         // Get by ID
@@ -43,11 +45,11 @@ namespace PowHome.Controllers
             return Ok(animal);
         }
 
-                // Get by Name
-        [HttpGet("FindByName/{Name}")]
-        public async Task<IActionResult> Get(string name)
+        // Get by Name
+        [HttpGet("FindByName/Name")]
+        public async Task<ActionResult<Animal>> Get(string name)
         {
-            var animal = await _context.Animals.FindAsync(name);
+            var animal = await _context.Animals.FirstOrDefaultAsync(p => p.Name == name);
 
             if (animal == null)
             {
@@ -59,32 +61,32 @@ namespace PowHome.Controllers
 
         // Create a new animal
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Animal animal)
+        public async Task<ActionResult<Animal>> PostAnimal(Animal animal)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            // animal.BirthDate = 
             _context.Animals.Add(animal);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction(nameof(Get), new { id = animal.Id }, animal);
         }
 
         // Update an existing animal
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Animal updatedAnimal)
+        [HttpPut]
+        public async Task<IActionResult> Put(Animal updatedAnimal)
         {
-            if (id != updatedAnimal.Id)
+            if (updatedAnimal.Id == 0)
             {
-                return BadRequest();
+                return BadRequest("No Existe");
             }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            // if (!ModelState.IsValid)
+            // {
+            //     return BadRequest(ModelState);
+            // }
 
             _context.Entry(updatedAnimal).State = EntityState.Modified;
 
@@ -94,7 +96,7 @@ namespace PowHome.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AnimalExists(id))
+                if (!AnimalExists(updatedAnimal.Id))
                 {
                     return NotFound();
                 }

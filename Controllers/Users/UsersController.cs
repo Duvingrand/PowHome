@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using PowHome.Controllers.Auth;
 using PowHome.Data;
 using PowHome.Models;
 
@@ -46,15 +47,14 @@ namespace PowHome.Controllers.Users
         [HttpPost]
         public async Task<ActionResult<User>> PostUser([FromBody] User user)
         {
-            // Aquí deberías hash la contraseña antes de guardar
-            // User.Password = HashPassword(User.Password);
+            // Hash de la contraseña antes de guardar
+            user.Password = AuthController.HashPassword(user.Password);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, User);
+            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
-
 
         // PUT: api/Users
         // PUT method works with search Id
@@ -66,6 +66,7 @@ namespace PowHome.Controllers.Users
                 return BadRequest("El usuario debe tener un ID.");
             }
 
+            userPut.Password = AuthController.HashPassword(userPut.Password);
             _context.Entry(userPut).State = EntityState.Modified;
 
             try

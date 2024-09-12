@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PowHome.Data;
 
@@ -11,9 +12,11 @@ using PowHome.Data;
 namespace PowHome.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240909124649_regresados Cambio de Requires de Animal ")]
+    partial class regresadosCambiodeRequiresdeAnimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,12 +104,14 @@ namespace PowHome.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<bool>("Specie")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<int>("SpecieID")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AdoptionCenterID");
+
+                    b.HasIndex("SpecieID");
 
                     b.ToTable("animals");
                 });
@@ -191,8 +196,8 @@ namespace PowHome.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(225)
-                        .HasColumnType("varchar(225)");
+                        .HasMaxLength(25)
+                        .HasColumnType("varchar(25)");
 
                     b.Property<double>("Price")
                         .HasColumnType("double");
@@ -206,6 +211,24 @@ namespace PowHome.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("products");
+                });
+
+            modelBuilder.Entity("PowHome.Models.Specie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("varchar(25)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("species");
                 });
 
             modelBuilder.Entity("PowHome.Models.Sponsorshipment", b =>
@@ -295,7 +318,15 @@ namespace PowHome.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PowHome.Models.Specie", "Specie")
+                        .WithMany()
+                        .HasForeignKey("SpecieID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("AdoptionCenter");
+
+                    b.Navigation("Specie");
                 });
 
             modelBuilder.Entity("PowHome.Models.AnimalCondition", b =>

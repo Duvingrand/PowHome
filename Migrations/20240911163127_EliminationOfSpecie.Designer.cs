@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PowHome.Data;
 
@@ -11,9 +12,11 @@ using PowHome.Data;
 namespace PowHome.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240911163127_EliminationOfSpecie")]
+    partial class EliminationOfSpecie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,6 +107,9 @@ namespace PowHome.Migrations
                     b.Property<bool>("Specie")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("SpecieID")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AdoptionCenterID");
@@ -191,8 +197,8 @@ namespace PowHome.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(225)
-                        .HasColumnType("varchar(225)");
+                        .HasMaxLength(25)
+                        .HasColumnType("varchar(25)");
 
                     b.Property<double>("Price")
                         .HasColumnType("double");
