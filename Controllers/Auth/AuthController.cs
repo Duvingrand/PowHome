@@ -42,36 +42,49 @@ namespace PowHome.Controllers.Auth
         // Método para generar un JWT
         private string GenerateJwtToken(User user)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_jwtSecret);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+                    
+             var claims = new[]
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Email, user.Email),
-                    // Agrega más claims según sea necesario
-                }),
-                Expires = DateTime.UtcNow.AddHours(1), // Ajusta el tiempo de expiración según tus necesidades
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSecret));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: "http://localhost:5154",
+                audience: "http://localhost:5154",
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        
         }
 
-        // POST: api/Users/login
+        // POST: api/Auth/login
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Login auth)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  
+                return BadRequest(ModelState);
             }
 
             var userfind = await _context.Users.FirstOrDefaultAsync(u => u.Email == auth.Email);
+            bool password;
 
-            if (userfind == null || !VerifyPassword(auth.Password, userfind.Password))
+            if (userfind == null)
+            {
+                return Unauthorized("Not founded user");
+            }
+            else
+            {
+                password = VerifyPassword(auth.Password, userfind.Password);
+            }
+
+            if (!password)
             {
                 return Unauthorized("Invalid email or password");
             }
@@ -79,5 +92,6 @@ namespace PowHome.Controllers.Auth
             var token = GenerateJwtToken(userfind);
             return Ok(new { Token = token });
         }
+
     }
 }

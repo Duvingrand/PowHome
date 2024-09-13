@@ -50,8 +50,8 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false, // Puedes configurar esto según tu necesidad
-        ValidateAudience = false, // Puedes configurar esto según tu necesidad
+        ValidateIssuer = false, //Optional attribute
+        ValidateAudience = false, //Optional attribute
         ValidateLifetime = true,
         ClockSkew = TimeSpan.Zero
     };
