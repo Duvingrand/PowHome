@@ -17,18 +17,18 @@ public class MoneyDonations
     public required DateOnly DayOfDonation { get; set; }
 
     // Foreign Key
-    public required int UserId { get; set; }
+    public int? UserId { get; set; }
 
-    public int? AdoptionCenterId { get; set; }
+    public int AdoptionCenterId { get; set; }
 
     // conections Foreing
     [JsonIgnore]
     [ForeignKey("UserId")]
-    public  User  User { get; set; }
+    public User? User { get; set; }
 
     // conections Foreing
     [JsonIgnore]
     [ForeignKey("AdoptionCenterId")]
-    public AdoptionCenter AdoptionCenter { get; set; }
+    public AdoptionCenter? AdoptionCenter { get; set; }
 
 }
