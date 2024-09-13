@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace PowHome.Models;
 
@@ -14,7 +9,7 @@ public class AdoptionCenter
     [Key]
     public int Id { get; set; }
 
-    [MinLength(5, ErrorMessage = "the name field must be at least {1} chartes.")]
+    [MinLength(2, ErrorMessage = "the name field must be at least {1} chartes.")]
     [MaxLength(225, ErrorMessage = "the name field must be at most {1} chartes.")]
     public required string Name { get; set; }
 

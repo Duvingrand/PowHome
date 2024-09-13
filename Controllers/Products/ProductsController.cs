@@ -24,14 +24,15 @@ namespace PowHome.Controllers.Products
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
         {
+            if (NameExists(product.Name))
+            {
+                return BadRequest("El nombre del producto ya está en uso.");              
+            }
+            
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetProduc), new {id = product.Id}, product);
-        }
 
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(p => p.Id == id);
+            return CreatedAtAction(nameof(GetProduc), new { id = product.Id }, product);
         }
 
         [HttpPut]
@@ -41,9 +42,9 @@ namespace PowHome.Controllers.Products
             {
                 return BadRequest("Debe ingresar un id existente");
             }
-            
-            _context.Entry(productPut).State = EntityState.Modified; 
-                
+
+            _context.Entry(productPut).State = EntityState.Modified;
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -52,7 +53,7 @@ namespace PowHome.Controllers.Products
             {
                 if (!ProductExists(productPut.Id))
                 {
-                    return NotFound();
+                    return BadRequest("El Id ingresado no es valido.");
                 }
                 else
                 {
@@ -70,7 +71,7 @@ namespace PowHome.Controllers.Products
 
             if (product == null)
             {
-                return NotFound();
+                return BadRequest("El Id ingresado no es valido.");
             }
 
             _context.Products.Remove(product);
@@ -78,8 +79,6 @@ namespace PowHome.Controllers.Products
 
             return NoContent();
         }
-
-
 
         // Get by Name
         [HttpGet("FindByName")]
@@ -89,12 +88,11 @@ namespace PowHome.Controllers.Products
 
             if (product == null)
             {
-                return NotFound();
+                return BadRequest("El nombre ingresado no es valido.");
             }
 
             return Ok(product);
         }
-
 
         // Get by ID
         [HttpGet("{id}")]
@@ -104,15 +102,23 @@ namespace PowHome.Controllers.Products
 
             if (product == null)
             {
-                return NotFound();
+                return BadRequest("El Id ingresado no es valido.");
             }
 
             return Ok(product);
         }
 
+        // verifica que el id no se repita
+        private bool ProductExists(int id)
+        {
+            return _context.Products.Any(p => p.Id == id);
+        }
 
-        
-
+        // confirma si el nombre ya existe
+        private bool NameExists(string name)
+        {
+            return _context.Products.Any(e => e.Name == name);
+        }
     }
 
 }

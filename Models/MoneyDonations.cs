@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace PowHome.Models;
 [Table("money_donations")] // name of the table
@@ -18,7 +14,6 @@ public class MoneyDonations
 
     // Foreign Key
     public int? UserId { get; set; }
-
     public int AdoptionCenterId { get; set; }
 
     // conections Foreing
