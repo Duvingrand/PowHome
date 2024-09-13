@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PowHome.Data;
 using PowHome.Models; 
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace PowHome.Controllers
 {
@@ -25,7 +23,6 @@ namespace PowHome.Controllers
             // var animals = await _context.Animals.Include(a => a.Specie).Include(a => a.AdoptionCenter).ToListAsync();
             // return Ok(animals);
             return await _context.Animals.ToListAsync();
-
         }
 
         // Get by ID
@@ -67,7 +64,7 @@ namespace PowHome.Controllers
                 return BadRequest(ModelState);
             }
 
-            // animal.BirthDate = 
+            // animal.BirthDate 
             _context.Animals.Add(animal);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(Get), new { id = animal.Id }, animal);

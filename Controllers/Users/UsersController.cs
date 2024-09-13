@@ -56,8 +56,7 @@ namespace PowHome.Controllers.Users
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
-        // PUT: api/Users
-        // PUT method works with search Id
+        // PUT: api/Users method works with search Id
         [HttpPut]
         public async Task<IActionResult> PutUser([FromBody] User userPut)
         {
