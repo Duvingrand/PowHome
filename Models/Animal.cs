@@ -33,7 +33,6 @@ public class Animal
     [MaxLength(50, ErrorMessage = "the Size field must be at most {1} chartes.")]
     public required string Size { get; set; }
 
-    [MinLength(5, ErrorMessage = "the Location field must be at least {1} chartes.")]
     [MaxLength(300, ErrorMessage = "the Location field must be at most {1} chartes.")]
     public required string Location { get; set; }
 

@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-
 namespace PowHome.Models;
+
 [Table("food_Donations")] // name of the table
 
 public class FoodDonations
@@ -17,10 +13,9 @@ public class FoodDonations
 
     // Foreign Key
     public int? UserId { get; set; }
-
     public int? ProductId { get; set; }
-
     public int? AdoptionCenterId { get; set; }
+
 
     // conections Foreing
     [JsonIgnore]

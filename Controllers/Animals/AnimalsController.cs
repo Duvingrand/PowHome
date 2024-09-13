@@ -33,7 +33,6 @@ namespace PowHome.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var animal = await _context.Animals
-                .Include(a => a.Specie)
                 .Include(a => a.AdoptionCenter)
                 .FirstOrDefaultAsync(a => a.Id == id);
 
