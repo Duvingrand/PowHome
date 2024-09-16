@@ -67,6 +67,7 @@ namespace PowHome.Controllers.Users
             }
 
             userPut.Password = AuthController.HashPassword(userPut.Password);
+
             _context.Entry(userPut).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
