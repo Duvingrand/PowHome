@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PowHome.Data;
@@ -8,10 +7,8 @@ namespace PowHome.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class AnimalsController : Controller
     {
-        
         private readonly MyDbContext _context;
 
         public AnimalsController(MyDbContext context)
