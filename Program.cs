@@ -64,6 +64,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Agregar y configurar CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -73,6 +85,9 @@ app.UseSwaggerUI();
 
 
 app.UseHttpsRedirection();
+
+// Habilitar CORS
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization(); //Verifica si el usuario tiene permiso para acceder al recurso solicitado.
 

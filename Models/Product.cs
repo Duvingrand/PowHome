@@ -20,6 +20,6 @@ public class Product
 
     public required double WeightKG { get; set; }
     public required int Quantity { get; set; }
-    public required string TypeOfProduct { get; set; }
+    public required bool TypeOfProduct { get; set; }
 
 }
